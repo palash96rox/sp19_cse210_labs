@@ -29,7 +29,7 @@ def sum_in_quad(n):
 def sum_in_cons(n):
     return n*(n+1)/2
 
-3. # Complexity: O(logn)
+3. # Complexity: O(num_of_digits)
 def reverse(n):
     rev = 0
     while n>0:
