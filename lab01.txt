@@ -27,7 +27,7 @@ def sum_in_quad(n):
     return sum
 # O(1)
 def sum_in_cons(n):
-    return n*(n+1)/2.0
+    return n*(n+1)/2
 
 3. # Complexity: O(logn)
 def reverse(n):
@@ -42,6 +42,26 @@ def palindrome(n):
     if rev == n: print("Palindrome!")
     else: print("Not Palindrome!")
 
-4. # Complexity:
-def sum(m,n):
-    
+4. # Complexity: O(n**3)
+def mul(m,n):
+    # Condition
+    if len(m[0]) != len(n): return None
+    # Initialize
+    c = []
+    for i in range(len(m)):
+        c.append([0]*len(n[0]))
+    # Multiply
+    for i in range(len(m)):
+        for j in range(len(n[0])):
+            for k in range(len(n)): 
+                c[i][j] += m[i][k]*n[k][j]
+    return c
+
+5.
+def peak(arr):
+    m = len(arr)//2
+    while m>0 and m<len(arr)-1:
+        if arr[m-1]<=arr[m] and arr[m+1]<=arr[m]: return arr[m]
+        elif arr[m-1]<=arr[m] and arr[m+1]>=arr[m]: m = m+1
+        elif arr[m-1]>=arr[m] and arr[m+1]<=arr[m]: m = m-1
+    return arr[m]
