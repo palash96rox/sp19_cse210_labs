@@ -1,0 +1,47 @@
+# python3.6
+
+1.
+(a) def square(n):
+        return n ** 2
+(b) def halve(n,count=0):
+        if n==1: return count
+        return halve(n//2,count+1)
+(c) def search(arr,n):
+        for i in range(len(arr)):
+            if arr[i] == n: return i
+        return -1
+
+2.
+# O(n)
+def sum_in_line(n):
+    sum = 0
+    for i in range(n+1): sum += i
+    return sum
+# O(n**2)
+def sum_in_quad(n):
+    sum = 0
+    for i in range(n+1):
+        inner_sum = 0
+        for j in range(i+1): inner_sum += 0 # delay loop
+        sum += inner_sum + i
+    return sum
+# O(1)
+def sum_in_cons(n):
+    return n*(n+1)/2.0
+
+3. # Complexity: O(logn)
+def reverse(n):
+    rev = 0
+    while n>0:
+        rev *= 10
+        rev += n%10
+        n = n//10
+    return rev
+def palindrome(n):
+    rev = reverse(n)
+    if rev == n: print("Palindrome!")
+    else: print("Not Palindrome!")
+
+4. # Complexity:
+def sum(m,n):
+    
