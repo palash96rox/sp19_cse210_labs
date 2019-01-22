@@ -1,0 +1,58 @@
+#python3.6
+
+1. Recurrence Relation:
+Code:
+def find_max(arr,max):
+  if len(arr)==0: return max
+  if arr[0]>max: max = arr[0]
+  return find_max(arr[1:],max)
+
+arr = [int(x) for x in input("Enter array elems: ").split()]
+max = find_max(arr[1:],arr[0])
+print("max in",arr,"is",max)
+
+2. Recurrence Relation:
+Code:
+def reverse(word,rev=''):
+  l = len(word)-1
+  if l+1==0: return rev
+  return reverse(word[:l],rev+word[l])
+
+word = input("Enter a word: ")
+rev = reverse(word)
+if(word==rev): print("Palindrome!")
+else: print("Not")
+
+3. Recurrence Relation: 
+Code:
+def reverse_array(arr,rev=[]):
+  l = len(arr)-1
+  if l+1==0: return rev
+  return reverse_array(arr[:l],rev+[arr[l]])
+
+arr = [int(x) for x in input("Enter elems: ").split()]
+rev = reverse_array(arr)
+print("Reverse of",arr,"is",rev)
+
+4. Code:
+def fib(n,a=0,b=1):
+  if n==0: return a
+  if n==1: return b
+  c = a+b
+  d = b+c
+  return fib(n-2,c,d)
+
+def fact(n,p=1):
+  if n==1: return p
+  return fact(n-1,p*n)
+
+n = int(input("Enter n: "))
+print(n,"factorial:",fact(n))
+print(n,"th fibonacci:",fib(n))
+(a) Recurrence Relation: 
+(b) Recurrence Relation:
+
+5. Code:
+
+(a) Recurrence Relation:
+(b) Recurrence Relation:
