@@ -1,6 +1,6 @@
 #python3.6
 
-1. Recurrence Relation: find_max(arr,max) = max(max,arr[0]); find_max(arr[1:],max)
+1. Recurrence Relation: T(n) = T(n-1) + 2
 Code:
 def find_max(arr,max):
   if len(arr)==0: return max
@@ -11,7 +11,7 @@ arr = [int(x) for x in input("Enter array elems: ").split()]
 max = find_max(arr[1:],arr[0])
 print("max in",arr,"is",max)
 
-2. Recurrence Relation: reverse(word) = word[last_character]+reverse(word[:last_character])
+2. Recurrence Relation: T(n) = T(n-1) + 1
 Code:
 def reverse(word,rev=''):
   l = len(word)-1
@@ -23,7 +23,7 @@ rev = reverse(word)
 if(word==rev): print("Palindrome!")
 else: print("Not")
 
-3. Recurrence Relation: reverse_array(arr) = arr[last_element]+reverse_array(arr[:last_element])
+3. Recurrence Relation: T(n) = T(n-1) + 1
 Code:
 def reverse_array(arr,rev=[]):
   l = len(arr)-1
@@ -49,8 +49,8 @@ def fact(n,p=1):
 n = int(input("Enter n: "))
 print(n,"factorial:",fact(n))
 print(n,"th fibonacci:",fib(n))
-(a) Recurrence Relation: fib(n) = fib(n-1)+fib(n-2)
-(b) Recurrence Relation: fact(n) = n*fact(n-1)
+(a) Recurrence Relation: T(n) = T(n-1) + T(n-2)
+(b) Recurrence Relation: T(n) = T(n-1) + 1
 
 5. Code:
 def reverse_stack(stack,rev=[]):
@@ -67,5 +67,5 @@ string = input("Enter String: ")
 print(string,"reversed:",reverse_string(string))
 stack = [int(x) for x in input("Enter elems: ").split()]
 print(stack,"reversed:",reverse_stack(stack))
-(a) Recurrence Relation:
-(b) Recurrence Relation: reverse_string(string) = string[last_character]+reverse_string(string[:last_character])
+(a) Recurrence Relation: T(n) = T(n-1) + 1
+(b) Recurrence Relation: T(n) = T(n-1) + 1

@@ -1,3 +1,4 @@
+# Recurrence Relation: T(n) = T(n-1) + T(n-2)
 def fib(n,a=0,b=1):
   if n==0: return a
   if n==1: return b
@@ -5,6 +6,7 @@ def fib(n,a=0,b=1):
   d = b+c
   return fib(n-2,c,d)
 
+# Recurrence Relation: T(n) = n * T(n-1)
 def fact(n,p=1):
   if n==1: return p
   return fact(n-1,p*n)

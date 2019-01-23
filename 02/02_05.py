@@ -1,8 +1,10 @@
+# Recurrence Relation: T(n) = T(n-1) + 1
 def reverse_stack(stack,rev=[]):
   l = len(stack)-1
   if l+1==0: return rev
   return reverse_stack(stack[:l],rev+[stack[l]])
 
+# Recurrence Relation: T(n) = T(n-1) + 1
 def reverse_string(string,rev=''):
   l = len(string)-1
   if l+1==0: return rev

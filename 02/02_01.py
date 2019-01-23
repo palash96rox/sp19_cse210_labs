@@ -1,3 +1,4 @@
+# Recurrence Relation: T(n) = T(n-1) + 2
 def find_max(arr,max):
   if len(arr)==0: return max
   if arr[0]>max: max = arr[0]

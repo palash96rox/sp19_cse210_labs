@@ -1,3 +1,4 @@
+# Recurrence Relation: T(n) = T(n-1) + 1
 def reverse_array(arr,rev=[]):
   l = len(arr)-1
   if l+1==0: return rev
