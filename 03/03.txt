@@ -1,3 +1,57 @@
+# python=3.6
+
+1.
+def find_sum(n,sum=0):
+  if n==0: return sum
+  return find_sum(n//10,sum+(n%10))
+
+n = int(input("Enter number: "))
+print("sum of digits:",find_sum(n))
+
+
+2.
+def binary_reverse(n,binary=''):
+  if n==0: return binary
+  return binary_reverse(n//2,binary+str(n%2))
+
+def find_binary(n):
+  binary = binary_reverse(n)
+  return '0b'+binary[::-1]
+
+def exp(n,e):
+  if e==0: return 1
+  h = exp(n,e//2)
+  if e%2==0: return h*h
+  return h*h*n
+
+n = int(input("Enter number: "))
+e = int(input("Enter exponent: "))
+print(n,"in binary:",find_binary(n))
+print(n,"**",e,"=",exp(n,e))
+
+
+3.
+# Binary search for ascending order
+# Requires: array, integer to find, start index, end index
+def binary_search(arr,x,l,r):
+  if l>r: return -1
+  m = (l+r)//2
+  if arr[m]>x: return binary_search(arr,x,0,m-1)
+  elif arr[m]<x: return binary_search(arr,x,m+1,r)
+  return m
+
+n = int(input("Enter num of elements: "))
+arr = []
+print("Enter elements")
+for _ in range(n): arr.append(int(input()))
+print("Entered array:",arr)
+arr = sorted(arr)
+print("Sorted array:",arr)
+x = int(input("Enter number to search: "))
+print(x,'at position',binary_search(arr,x,0,n))
+
+
+4.
 # Extended master's theorem: T(n) = aT(n/b)+O(n**k(logn)**i)
 # chr(920) = Θ; chr(8712) = ∈; chr(8776) = ≈;
 import math
@@ -62,3 +116,6 @@ reccurence,solution = master(a,b,k,i)
 print('\n\nreccurence relation:',reccurence)
 print('\nsolution:',solution)
 print()
+
+# Notes
+Please make us submit codes so you may test
