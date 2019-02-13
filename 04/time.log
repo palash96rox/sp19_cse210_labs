@@ -1,0 +1,13 @@
+-- function call
+04.check_same(2**1)
+04.check_same(2**2)
+04.check_same(2**3)
+04.check_same(2**4)
+04.check_same(2**5)
+04.check_same(2**6)
+04.check_same(2**7)
+04.check_same(2**8)
+04.check_same(2**9)
+04.check_same(2**10)
+
+-- output

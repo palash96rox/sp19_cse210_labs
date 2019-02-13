@@ -1,49 +1,31 @@
-import helper
+from helper import *
 
-def get_sums(X):
-  X11, X12, X21, X22 = helper.divide_into_four(X)
-
-  Xr1 = helper.mat_sum(X11,X12)
-  Xr2 = helper.mat_sum(X21,X22)
-  Xc1 = helper.mat_diff(X11,X21)
-  Xc2 = helper.mat_diff(X12,X22)
-  Xd1 = helper.mat_sum(X11,X22)
-
-  return (Xr1,Xr2,Xc1,Xc2,Xd1)
-
-def get_products(A,B):
-  A11, A12, A21, A22 = helper.divide_into_four(A)
-  Ar1,Ar2,Ac1,Ac2,Ad1 = get_sums(A)
-
-  B11, B12, B21, B22 = helper.divide_into_four(B)
-  Br1,Br2,Bc1,Bc2,Bd1 = get_sums(B)
-
-  P11 = mat_mul(A11,Bc2)
-  P21 = mat_mul(A22,Bc1)
-  Pr1 = mat_mul(Ar1,B22)
-  Pr2 = mat_mul(Ar2,B11)
-  Pc1 = mat_mul(Ac1,Br1)
-  Pc2 = mat_mul(Ac2,Br2)
-  Pd1 = mat_mul(Ad1,Bd1)
-
-  return (P11,P21,Pr1,Pr2,Pc1,Pc2,Pd1)
-
-def get_sub_mat(A,B):
-  P11,P21,Pr1,Pr2,Pc1,Pc2,Pd1 = get_products(A,B)
-
-  C11 = helper.mat_diff(helper.mat_diff(Pd1,Pr1),helper.mat_diff(P22,Pc2))
-  C12 = helper.mat_sum(P11, Pr1)
-  C21 = helper.mat_diff(Pr2,P22)
-  C22 = helper.mat_diff(helper.mat_diff(Pd1,Pr2),helper.mat_diff(P11,Pc1))
-
-  return (C11,C12,C21,C22)
-
-# Algorithm source - https://www3.cs.stonybrook.edu/~rezaul/Fall-2012/CSE548/CSE548-lecture-3.pdf
+# Strassen Matrix Multiplication
 def mat_mul(A,B):
-  C11,C12,C21,C22 = get_sub_mat(A,B)
-
+  if len(A) != len(B): return None
   n = len(A)
+  if n == 1:
+    C = [[0]]
+    C[0][0] = A[0][0]*B[0][0]
+    return C
+  C = [[0 for _ in range(n)] for _ in range(n)]
 
-  C = [[None]*n]*n
+  A11,A12,A21,A22 = divide_into_four(A)
+  B11,B12,B21,B22 = divide_into_four(B)
 
-  return C
+  P1 = mat_mul(mat_sum(A11,A22),mat_sum(B11,B22))
+  P2 = mat_mul(mat_sum(A21,A22),B11)
+  P3 = mat_mul(A11,mat_diff(B12,B22))
+  P4 = mat_mul(A22,mat_diff(B21,B11))
+  P5 = mat_mul(mat_sum(A11,A12),B22)
+  P6 = mat_mul(mat_diff(A21,A11),mat_sum(B11,B12))
+  P7 = mat_mul(mat_diff(A12,A22),mat_sum(B21,B22))
+
+  C11 = mat_sum(mat_diff(mat_sum(P1,P4),P5),P7)
+  C12 = mat_sum(P3,P5)
+  C21 = mat_sum(P2,P4)
+  C22 = mat_sum(mat_diff(mat_sum(P1,P3),P2),P6)
+
+  return combine_into_one(C11,C12,C21,C22)
+
+# src: https://stackoverflow.com/questions/12867099/strassen-matrix-multiplication-close-but-still-with-bugs
