@@ -15,5 +15,6 @@ def quicksort(arr, low, high):
     quicksort(arr, index+1, high)
   return arr
 
-arr = [5,4,3,2,1]
-print(quicksort(arr,0,len(arr)-1))
+if __name__ == '__main__':
+  arr = [5,4,3,2,1]
+  print(quicksort(arr,0,len(arr)-1))

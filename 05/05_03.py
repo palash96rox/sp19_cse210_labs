@@ -32,5 +32,6 @@ def mergesort(arr,low,high):
     merge(arr,low,mid,high)
   return arr
 
-arr = [5,4,3,2,1]
-print(mergesort(arr,0,len(arr)-1))
+if __name__ == '__main__':
+  arr = [5,4,3,2,1]
+  print(mergesort(arr,0,len(arr)-1))

@@ -15,5 +15,6 @@ def min_max(arr,low,high,min=None,max=None):
     else: max = max1
   return (min,max)
 
-arr = [-1,-2,-3,-4,-5]
-print(min_max(arr,0,len(arr)-1))
+if __name__ == '__main__':
+  arr = [-1,-2,-3,-4,-5]
+  print(min_max(arr,0,len(arr)-1))
