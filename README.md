@@ -3,6 +3,7 @@
 ## Directory Structure
 
 `/pdf`: All released course material
+
 `/??`: `src` files in python, `zip` file submitted, and (some) `png` files showing screens
 
 ## Lab details
