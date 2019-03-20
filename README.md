@@ -6,6 +6,8 @@
 
 `/??`: `src` files in python, `zip` file submitted, and (some) `png` files showing screens
 
+`/ass`: Assignment(s) in course
+
 ## Lab details
 
 - `lab01`: Basics and introduction; screens (with code) in `.zip`
