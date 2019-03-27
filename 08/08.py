@@ -2,6 +2,7 @@ if __name__ == '__main__':
   
   import scheduling
   import knapsack
+  import platforms
 
   print('\n' + ('-'*50) + '\nlab08\n' + ('-'*50))
   
@@ -11,7 +12,8 @@ if __name__ == '__main__':
     print('1. No conflict scheduling')
     print('2. Knapsack Problem')
     print('3. Fractional Knapsack')
-    print('4. Exit')
+    print('4. Platform problem')
+    print('5. Exit')
     c = int(input('?: '))
     
     if c==1:
@@ -41,7 +43,13 @@ if __name__ == '__main__':
         print('List: ' + 
           ','.join(str((item['value'],item['weight'])) for item in selected))
 
-    elif c==4: break
+    elif c==4:
+      arr = platforms.get_arrivals()
+      dep = platforms.get_departures()
+      plats = platforms.min_platforms(arr,dep)
+      print('Minimum platforms required:',plats)
+    
+    elif c==5: break
     else: print('Invalid')
 
     print('-'*50)
