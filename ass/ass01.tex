@@ -1,0 +1,134 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+\title{cse210 ass01}
+\author{pa5795}
+\date{2 April 2019}
+
+\begin{document}
+
+\maketitle
+
+\section{Master's Theorem}
+Extended master's theorem: $T(n) = a T(\frac{n}{b}) + \Theta(n^k log^p n)$
+\subsection{Case 1: $ a > b^k \Rightarrow T(n) = \Theta(n^{log_b a}) $}
+\subsection{Case 2: $ a = b^k $}
+\subsubsection{$ p > -1 \Rightarrow T(n) = \Theta(n^k log^{p+1} n)$}
+\subsubsection{$ p = -1 \Rightarrow T(n) = \Theta(n^k log(log n))$}
+\subsubsection{$ p < -1 \Rightarrow T(n) = \Theta(n^k)$}
+\subsection{Case 3: $ a < b^k $}
+\subsubsection{$ p \geq 0 \Rightarrow T(n) = \Theta(n^k log^p n)$}
+\subsubsection{$ p < 0 \Rightarrow T(n) = O(n^k)$}
+
+
+\section{Minimum Spanning Trees}
+\subsection{Prim's Algorithm}
+Time Complexity: $O((V+E) log(V))$
+\begin{algorithm}
+\begin{algorithmic}
+\STATE $ V \leftarrow$ (number of vertices)
+\STATE $ U \leftarrow 1 $
+\STATE $ T \leftarrow \emptyset $
+\WHILE{$ V \ne U $}
+\STATE $ (u,v) \leftarrow$ Lowest cost edge; $u \in U$ and $v \in V-U $
+\STATE $ T \leftarrow T \cup (u,v) $
+\STATE $ U \leftarrow U \cup {v} $
+\ENDWHILE
+\end{algorithmic}
+\end{algorithm}
+\subsection{Kruskal's Algorithm}
+Time Complexity: $O(E log(V))$
+\begin{algorithm}
+\begin{algorithmic}
+\STATE $ V \leftarrow$ (number of vertices)
+\STATE $ T \leftarrow \emptyset $
+\FOR{e in G.E (Ordered by weight in ascending order)}
+\IF{$find(u) \neq find(v)$}
+\STATE $T = T \cup (u,v)$
+\STATE Union(u,v)
+\ENDIF
+\ENDFOR
+\end{algorithmic}
+\end{algorithm}
+
+
+\section{Activity Selection}
+\begin{algorithm}
+\begin{algorithmic} 
+\REQUIRE lists sorted in ascending order by end times
+\STATE $i \leftarrow 0$
+\STATE $j \leftarrow 1$
+\STATE $activities = []$
+\WHILE{$j < N$}
+\IF{$start[j] > end[i]$}
+\STATE $activities[i] \leftarrow (start[j],end[i])$
+\STATE $i = j$
+\ENDIF
+\STATE $j \leftarrow j+1$
+\ENDWHILE
+\end{algorithmic}
+\end{algorithm}
+Time Complexity: As sorted array is required by the algorithm, the time complexity is just $O(n)$.
+
+
+\section{Time Table Scheduler}
+Code[Python]:
+\begin{lstlisting}[language=python]
+def time_table(start,end,k):
+    n = len(start)
+    arr = sorted(list(zip(start,finish)),key=lambda x: x[1])
+    rooms = [[] for _ in range(k)]
+    for i in range(n):
+        for j in rooms:
+            if not j or j[-1]<=arr[i][0]:
+                j.append(arr[i][j])
+                break
+    return rooms
+\end{lstlisting}
+
+
+\section{Asymptotic Notations}
+
+\subsection{Big-O: Upper Bound}
+This gives the upper bound of a function. If $f(n) = O(g(n)$, the time complexity of the function ($f(n)$) is at least $g(n)$.\\
+\textbf{Rule}: $f(n) = O(g(n))$ iff $\exists c, x_0$, such that, $f(x) \leq c g(x), x \geq x_0$\\
+\textbf{Implication}: The growth rate of $f(n) \leq$ the growth rate of $g(n)$\\
+\textbf{Example}: $f(2n+3) = O(g(10n)) = O(g(n)) = O(g(n^2)) = O(g(n^3)) = ...$
+
+\subsection{Omega $\Omega$: Lower Bound}
+This gives the lower bound of a function. If $f(n) = \Omega(g(n)$, the time complexity of the function ($f(n)$) is at most $g(n)$.\\
+\textbf{Rule}: $f(n) = \Omega(g(n))$ iff $\exists c, x_0$, such that, $f(x) \geq c g(x), x \geq x_0$\\
+\textbf{Implication}: The growth rate of $f(n) \geq$ the growth rate of $g(n)$\\
+\textbf{Example}: $f(n^3) = \Omega(g(n^2)) = \Omega(g(n)) = \Omega(g(logn)) = ...$
+
+\subsection{Theta $\Theta$: Range Bound}
+This gives the range bound of a function. If $f(n) = \Theta(g(n)$, the time complexity of the function ($f(n)$) lies between $g(n)$.\\
+\textbf{Rule}: $f(n) = \Theta(g(n))$ iff $\exists c_1,c_2, x_0$, such that, $c_1 g(x) \leq f(x) \leq c_2 g(x), x \geq x_0$\\
+\textbf{Another way to write the rule}: $f(n) = \Theta(g(n))$ iff $f(n) = O(g(n))$ and $f(n) = \Omega(g(n))$\\
+\textbf{Implication}: The growth rate of $f(n) ==$ the growth rate of $g(n)$\\
+\textbf{Example}: $f(2n^3) = \Theta(g(n^3))$
+
+
+\section{Recursive Fibonacci}
+Code [Python]:
+\begin{lstlisting}[language=python]
+    def fib(n):
+      if n==0 or n==1: return 1
+      return fib(n-1)+fib(n-2)
+\end{lstlisting}
+Time Complexity:\\
+$T(n) = T(n-2) + T(n-1) + O(1)$\\
+Let $T(n) = r^n$\\
+$\implies r^n = r^{n-1} + r^{n-2} + k$ [k:constant]\\
+$\implies r^2 = r + 1 + \frac{k}{r^{n-2}}$\\
+$\implies r^2 - r - c = 0$ $[c = 1 + \frac{k}{r^{n-2}}]$\\
+$\implies r = \frac{1 \pm \sqrt{1 + 4c}}{2}$\\
+$\implies r^n = (\frac{1 \pm \sqrt{1 + 4c}}{2})^n$\\
+$\implies T(n) = r^n = (\frac{1 \pm \sqrt{1 + 4c}}{2})^n$\\
+$\implies T(n) = O(k^n)$
+
+
+\end{document}
